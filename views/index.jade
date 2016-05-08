@@ -1,0 +1,39 @@
+doctype html
+html(lang = 'en-US')
+  head
+    meta(charset = "utf-8")
+    meta(name = "author", content = "dickson")
+    title Twine Health Challenge - Dickson Lau
+    link(rel = 'stylesheet', type = "text/css", media = "all", href = "css/styles.css")
+    script(type = "text/javascript", src = "js/jquery-1.10.2.min.js")
+    script(type = "text/javascript", src="js/jquery.tablesorter.min.js")
+
+  body
+    #wrapper
+      h1 Patients with high blood pressure (systolic over 140 or diastolic over 90)
+      
+      table#keywords(cellspacing = "0", cellpadding = "0")
+        thead
+          tr
+            th Name
+            th Age
+            th Blood Pressure (systolic)
+            th Blood Pressure (diastolic)
+        tbody
+          each patient in json
+            if patient.systolic > 140 || patient.diastolic > 90
+              tr
+                td.lalign #{patient.firstName} #{patient.lastName}
+                td #{patient.age}
+                td #{patient.systolic}
+                td #{patient.diastolic}
+    script(type = "text/javascript").
+      $(function(){
+        $('#keywords').tablesorter({ sortList: [[1,0]] });
+      });
+    footer
+      p Submission by Dickson Lau for Twine Health challenge. Running on Node.js with Express and Jade.
+      p
+        a(href="http://www.github.com/tsdlau") hi, check out some of my stuff
+      p
+        a(href="http://blog.teamtreehouse.com/how-to-code-sortable-tabular-data-with-jquery") this tutorial was used for the sortable table
